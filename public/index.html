@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>H. Index | Academic Research Services</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Link to your optional CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Minimal inline styles if needed, prefer styles.css or Tailwind */
+    .hero-gradient { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); }
+    .service-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+    #contact label, #contact p { color: #374151; } /* Ensure contrast */
+    #contact a { color: #d97706; } /* Amber */
+    #contact a:hover { color: #b45309; }
+    footer a { color: #9ca3af; } /* Gray */
+    footer a:hover { color: #fcd34d; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Navbar -->
+  <nav class="bg-white p-4 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <div class="bg-yellow-400 p-2 rounded-full">
+          <i class="fas fa-flask text-white text-xl"></i>
+        </div>
+        <h1 class="text-2xl font-bold text-gray-800">H. Index</h1>
+      </div>
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex space-x-8 text-gray-700 font-medium items-center">
+        <li><a href="#home" class="hover:text-yellow-500 transition">Home</a></li>
+        <li><a href="#services" class="hover:text-yellow-500 transition">Services</a></li>
+        <li><a href="#contact" class="hover:text-yellow-500 transition">Contact</a></li>
+        <li><a href="login.html" class="bg-amber-500 text-white px-4 py-2 rounded-md hover:bg-amber-600 transition text-sm font-semibold">Login / Register</a></li>
+      </ul>
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-white absolute top-full left-0 right-0 shadow-md z-40">
+      <ul class="flex flex-col items-center py-4 space-y-3">
+        <li><a href="#home" class="block w-full text-center hover:text-yellow-500 transition px-4 py-2" onclick="closeMobileMenu()">Home</a></li>
+        <li><a href="#services" class="block w-full text-center hover:text-yellow-500 transition px-4 py-2" onclick="closeMobileMenu()">Services</a></li>
+        <li><a href="#contact" class="block w-full text-center hover:text-yellow-500 transition px-4 py-2" onclick="closeMobileMenu()">Contact</a></li>
+        <li><a href="login.html" class="block w-full text-center bg-amber-500 text-white px-4 py-2 rounded-md hover:bg-amber-600 transition" onclick="closeMobileMenu()">Login / Register</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="bg-amber-700 text-white py-20 md:py-32">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">Enhance Your Research Impact</h2>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        Professional academic services to elevate your research publications and career.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#services" class="bg-white text-amber-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition shadow-lg">
+          Our Services
+        </a>
+        <button onclick="redirectToLogin()" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-amber-700 transition">
+          Get Started
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section (Content from original file) -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="p-4"><div class="text-4xl font-bold text-yellow-500 mb-2">100+</div><div class="text-gray-600">Researchers Helped</div></div>
+            <div class="p-4"><div class="text-4xl font-bold text-yellow-500 mb-2">50+</div><div class="text-gray-600">Publications</div></div>
+            <div class="p-4"><div class="text-4xl font-bold text-yellow-500 mb-2">10+</div><div class="text-gray-600">Countries</div></div>
+            <div class="p-4"><div class="text-4xl font-bold text-yellow-500 mb-2">5+</div><div class="text-gray-600">Years Experience</div></div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Services Section (Content from original file) -->
+  <section id="services" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-6">
+          <div class="text-center mb-16">
+              <h3 class="text-3xl md:text-4xl font-bold mb-4">Our Research Services</h3>
+              <p class="text-lg text-gray-600 max-w-2xl mx-auto">Comprehensive support for all stages of your academic research journey</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div class="service-card bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition"><div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-6"><i class="fas fa-chart-bar text-yellow-500 text-2xl"></i></div><h4 class="text-xl font-bold mb-3">Data Analysis</h4><p class="text-gray-600 mb-4">Advanced statistical analysis including regression, ANOVA, and multivariate techniques.</p><ul class="space-y-2 text-gray-600"><li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-2"></i> SPSS, R, Python</li><li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-2"></i> Data visualization</li><li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-2"></i> Interpretation</li></ul></div>
+              <div class="service-card bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition"><div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-6"><i class="fas fa-book-open text-yellow-500 text-2xl"></i></div><h4 class="text-xl font-bold mb-3">Literature Review</h4><p class="text-gray-600 mb-4">Systematic literature reviews with comprehensive analysis and synthesis.</p><ul class="space-y-2 text-gray-600"><li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-2"></i> PRISMA guidelines</li><li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-2"></i> Thematic analysis</li><li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-2"></i> Gap identification</li></ul></div>
+              <div class="service-card bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition"><div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-6"><i class="fas fa-pen-fancy text-yellow-500 text-2xl"></i></div><h4 class="text-xl font-bold mb-3">Manuscript Writing</h4><p class="text-gray-600 mb-4">Professional academic writing and editing services for journal submissions.</p><ul class="space-y-2 text-gray-600"><li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-2"></i> APA/MLA formatting</li><li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-2"></i> Proofreading</li><li class="flex items-center"><i class="fas fa-check text-yellow-500 mr-2"></i> Journal selection</li></ul></div>
+          </div>
+      </div>
+  </section>
+
+  <!-- Contact Form Section (Content from original file) -->
+  <section id="contact" class="py-16 bg-white">
+      <div class="container mx-auto px-6 max-w-4xl">
+          <div class="text-center mb-12">
+              <h3 class="text-3xl font-bold mb-4 text-gray-800">Get In Touch</h3>
+              <p class="text-lg text-gray-600 max-w-2xl mx-auto">Ready to discuss your research project? Contact us today via email or WhatsApp.</p>
+              <div class="mt-6 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                  <a href="mailto:h.index145@gmail.com" class="inline-flex items-center text-amber-700 hover:text-amber-800"><i class="fas fa-envelope text-2xl mr-2"></i> h.index145@gmail.com</a>
+                  <a href="https://wa.me/201033458385" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-amber-700 hover:text-amber-800"><i class="fab fa-whatsapp text-2xl mr-2"></i> +20 103 345 8385</a>
+              </div>
+          </div>
+          <div class="bg-gray-50 p-8 md:p-10 rounded-xl shadow-md">
+              <form action="https://formspree.io/f/xnnplejd" method="POST" class="space-y-6">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div><label for="name" class="block font-medium mb-2">Your Name</label><input type="text" id="name" name="name" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-gray-800" required></div>
+                      <div><label for="email" class="block font-medium mb-2">Email Address</label><input type="email" id="email" name="email" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-gray-800" required></div>
+                  </div>
+                  <div><label for="phone" class="block font-medium mb-2">Phone Number (Optional)</label><input type="tel" id="phone" name="phone" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-gray-800"></div>
+                  <div><label for="service" class="block font-medium mb-2">Service Needed</label><select id="service" name="service" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent bg-white text-gray-800"><option value="">Select a service</option><option value="Data Analysis">Data Analysis</option><option value="Literature Review">Literature Review</option><option value="Manuscript Writing">Manuscript Writing</option><option value="Systematic Review and Meta-analyses">Systematic Review and Meta-analyses</option><option value="Plagiarism and Paraphrasing Checking">Plagiarism and Paraphrasing Checking</option><option value="Language Editing">Language Editing</option><option value="References and Citations">References and Citations</option><option value="Other">Other</option></select></div>
+                  <div><label for="message" class="block font-medium mb-2">Your Message</label><textarea id="message" name="message" rows="5" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-gray-800" required></textarea></div>
+                  <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                      <button type="submit" class="w-full sm:w-auto bg-amber-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-amber-700 transition duration-300 shadow-md">Send Message</button>
+                      <div class="text-center sm:text-right"><p class="text-sm">Or contact us directly:</p><div class="flex justify-center sm:justify-end space-x-4 mt-1"><a href="mailto:h.index145@gmail.com" class="text-amber-600 hover:text-amber-700" title="Email"><i class="fas fa-envelope text-xl"></i></a><a href="https://wa.me/201033458385" target="_blank" rel="noopener noreferrer" class="text-amber-600 hover:text-amber-700" title="WhatsApp"><i class="fab fa-whatsapp text-xl"></i></a><a href="tel:+201033458385" class="text-amber-600 hover:text-amber-700" title="Phone"><i class="fas fa-phone-alt text-xl"></i></a></div></div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </section>
+
+  <!-- Footer (Content from original file) -->
+  <footer class="bg-gray-800 text-white py-12">
+      <div class="container mx-auto px-6">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div><div class="flex items-center mb-4"><div class="bg-yellow-500 p-2 rounded-full mr-3"><i class="fas fa-flask text-white"></i></div><h4 class="text-xl font-bold">H. Index</h4></div><p class="text-sm">Professional academic research services to help researchers achieve their publication goals.</p></div>
+              <div><h5 class="text-lg font-semibold mb-4">Quick Links</h5><ul class="space-y-2 text-sm"><li><a href="#home" class="hover:text-yellow-400 transition">Home</a></li><li><a href="#services" class="hover:text-yellow-400 transition">Services</a></li><li><a href="#contact" class="hover:text-yellow-400 transition">Contact</a></li><li><a href="login.html" class="hover:text-yellow-400 transition">Login / Register</a></li></ul></div>
+              <div><h5 class="text-lg font-semibold mb-4">Services</h5><ul class="space-y-2 text-sm"><li><span class="text-gray-400">Data Analysis</span></li><li><span class="text-gray-400">Literature Review</span></li><li><span class="text-gray-400">Manuscript Writing</span></li><li><span class="text-gray-400">Systematic Review</span></li><li><span class="text-gray-400">Plagiarism Check</span></li><li><span class="text-gray-400">Language Editing</span></li><li><span class="text-gray-400">References & Citations</span></li></ul></div>
+              <div><h5 class="text-lg font-semibold mb-4">Connect With Us</h5><div class="flex space-x-4 mb-4"><a href="https://wa.me/201033458385" target="_blank" rel="noopener noreferrer" title="WhatsApp" class="bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-yellow-500 transition"><i class="fab fa-whatsapp"></i></a><a href="mailto:h.index145@gmail.com" title="Email" class="bg-gray-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-yellow-500 transition"><i class="fas fa-envelope"></i></a></div><p class="text-sm">Email: h.index145@gmail.com<br>Phone/WhatsApp: +201033458385</p></div>
+          </div>
+          <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm"><p>© 2024 H. Index Research Services. All rights reserved.</p></div>
+      </div>
+  </footer>
+
+  <!-- Include scripts.js if needed for shared functions -->
+  <!-- <script src="scripts.js"></script> -->
+  <script>
+    // Simple redirection function
+    function redirectToLogin() {
+      window.location.href = "login.html"; // Points to login page in the same folder
+    }
+
+    // Basic Mobile Menu Toggle Logic
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a'); // Get all links in mobile menu
+
+    menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+    });
+
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('active');
+    }
+
+    // Close menu when a link inside it is clicked
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Optional: Close menu if clicking outside the nav area
+    document.addEventListener('click', function(event) {
+      const isClickInsideNav = menuButton.contains(event.target) || mobileMenu.contains(event.target);
+      if (!isClickInsideNav && mobileMenu.classList.contains('active')) {
+        closeMobileMenu();
+      }
+    });
+  </script>
+</body>
+</html>

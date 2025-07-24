@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login | H. Index</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to base styles -->
+    <style>
+        /* Login specific styles merged */
+        body { background-color: #f9fafb; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 1rem; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
+        .logo-container { display: flex; align-items: center; margin-bottom: 1.5rem; color: #374151; }
+        .logo-icon { background-color: #f59e0b; padding: 0.75rem; border-radius: 9999px; margin-right: 0.75rem; }
+        .logo-icon i { color: white; font-size: 1.5rem; }
+        .logo-text { font-size: 1.875rem; font-weight: bold; }
+        .login-container { background: #ffffff; padding: 2rem 2.5rem; border-radius: 10px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); width: 100%; max-width: 420px; color: #1f2937; }
+        .input-group { position: relative; margin-bottom: 1.25rem; }
+        .input-group input { width: 100%; padding: 0.75rem 0.75rem 0.75rem 2.75rem; border: 1px solid #d1d5db; border-radius: 6px; outline: none; background-color: #f9fafb; color: #1f2937; transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; font-size: 1rem; }
+        .input-group input:focus { border-color: #f59e0b; box-shadow: 0 0 0 1px #f59e0b; background-color: #ffffff; }
+        .input-group i { position: absolute; top: 50%; transform: translateY(-50%); left: 1rem; color: #9ca3af; font-size: 0.875rem; }
+        .options-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .remember-me { display: flex; align-items: center; }
+        .remember-me input[type="checkbox"] { width: 1rem; height: 1rem; border-radius: 4px; border: 1px solid #d1d5db; color: #f59e0b; margin-right: 0.5rem; cursor: pointer; transition: background-color 0.2s ease-in-out; appearance: none; flex-shrink: 0; }
+        .remember-me input[type="checkbox"]:checked { background-color: #f59e0b; border-color: #f59e0b; background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e"); background-size: 100% 100%; background-position: center; background-repeat: no-repeat; }
+        .remember-me input[type="checkbox"]:focus { outline: none; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3); }
+        .remember-me label { color: #374151; font-size: 0.875rem; cursor: pointer; user-select: none; }
+        .forgot-password { color: #f59e0b; text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.3s ease; }
+        .forgot-password:hover { color: #d97706; }
+        .btn { background: #f59e0b; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease; width: 100%; font-weight: 600; font-size: 1rem; margin-top: 0.5rem; }
+        .btn:hover { background: #d97706; }
+        .btn:disabled { background-color: #fbbf24; cursor: not-allowed; }
+        .register-link { text-align: center; margin-top: 1.5rem; color: #4b5563; font-size: 0.875rem; }
+        .register-link a { color: #f59e0b; font-weight: 600; text-decoration: none; }
+        .register-link a:hover { text-decoration: underline; }
+        h2 { color: #111827; font-weight: bold; font-size: 1.5rem; /* text-2xl */ }
+        p.subtitle { color: #4b5563; font-size: 0.875rem; }
+        .error-message { color: #dc2626; font-size: 0.875rem; text-align: center; margin-top: 1rem; min-height: 1.25rem; }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+     <div class="logo-container">
+         <div class="logo-icon"> <i class="fas fa-flask"></i> </div>
+         <span class="logo-text">H. Index</span>
+     </div>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <h2 class="text-center mb-2">Login to Your Account</h2>
+        <p class="text-center mb-6 subtitle">Enter your email and password</p>
+        <form id="loginForm" novalidate> <!-- Added novalidate to handle errors via JS -->
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder="Email Address" required autocomplete="email">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="Password" required autocomplete="current-password">
+            </div>
+            <div class="options-row">
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+                <a href="#" class="forgot-password">Forgot password?</a>
+            </div>
+            <!-- Error Message Area -->
+            <div id="errorMessage" class="error-message"></div>
+            <button type="submit" id="loginButton" class="btn">Log in</button>
+        </form>
+        <p class="register-link">
+            Don't have an account? <a href="register.html">Sign up</a>
+        </p>
+    </div>
+
+    <!-- Login Script with Debug Logs -->
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const loginButton = document.getElementById("loginButton");
+        const errorMessageDiv = document.getElementById("errorMessage");
+
+        // --- DEBUG ---
+        console.log("Login script loaded. Attaching listener...");
+
+        if (loginForm) { // Ensure form exists before adding listener
+            loginForm.addEventListener("submit", async function (e) {
+                e.preventDefault();
+                // --- DEBUG ---
+                console.log("Login form submitted!");
+
+                errorMessageDiv.textContent = ''; // Clear previous errors
+                loginButton.disabled = true; // Disable button during request
+                loginButton.textContent = 'Logging in...';
+
+                const email = emailInput.value.trim();
+                const password = passwordInput.value; // Don't trim password
+
+                if (!email || !password) {
+                    // --- DEBUG ---
+                    console.log("Validation failed: Missing email or password.");
+                    errorMessageDiv.textContent = "Please enter both email and password.";
+                    loginButton.disabled = false;
+                    loginButton.textContent = 'Log in';
+                    return;
+                }
+
+                // --- DEBUG ---
+                console.log(`Attempting API login for email: ${email}`);
+
+                try {
+                    // --- DEBUG ---
+                    console.log("Sending fetch request to /api/auth/login...");
+
+                    const response = await fetch('/api/auth/login', { // Relative URL works
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    // --- DEBUG ---
+                    console.log(`Received response status: ${response.status}`);
+
+                    const data = await response.json(); // Always try to parse JSON
+
+                    // --- DEBUG ---
+                    console.log("Parsed response data:", data);
+
+                    if (!response.ok) {
+                        // --- DEBUG ---
+                        console.log(`Response not OK (Status: ${response.status}). Throwing error: ${data.message || 'Unknown login error'}`);
+                        throw new Error(data.message || `Login failed (${response.status})`);
+                    }
+
+                    // --- Login Successful ---
+                    console.log('API Login successful:', data);
+
+                    // Basic check if essential data is present
+                    if (!data.token || !data.user || !data.user.role) {
+                        console.error("Login response missing token or user data.", data);
+                        throw new Error("Login failed: Incomplete data received from server.");
+                    }
+
+                    // Store token and user info
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('loggedInUser', JSON.stringify(data.user));
+
+                    alert(`Login successful! Welcome, ${data.user.name || data.user.email || 'User'}.`); // Simple feedback
+
+                    // --- DEBUG ---
+                    console.log(`Redirecting based on role: ${data.user.role}`);
+
+                    // Redirect based on role
+                    if (data.user.role === "client") { window.location.href = "client-dashboard.html"; }
+                    else if (data.user.role === "freelancer") { window.location.href = "freelancer-dashboard.html"; }
+                    else { console.error("Unknown user role:", data.user.role); errorMessageDiv.textContent = "Login succeeded but role is unclear."; loginButton.disabled = false; loginButton.textContent = 'Log in';}
+
+                } catch (error) {
+                    // --- DEBUG ---
+                    console.error('Login catch block error:', error);
+                    errorMessageDiv.textContent = error.message; // Show specific error
+                    loginButton.disabled = false;
+                    loginButton.textContent = 'Log in';
+                    passwordInput.value = ""; // Clear password on failed attempt
+                }
+            });
+
+            // --- DEBUG ---
+            console.log("Login listener attached.");
+        } else {
+             console.error("Login form not found!");
+        }
+
+    </script>
+</body>
+</html>

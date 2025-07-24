@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Register | H. Index</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Optional shared styles -->
+     <style>
+        /* Styles copied/adapted from login.html */
+        body { background-color: #f9fafb; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 1rem; font-family: sans-serif; }
+        .logo-container { display: flex; align-items: center; margin-bottom: 1.5rem; color: #374151; }
+        .logo-icon { background-color: #f59e0b; padding: 0.75rem; border-radius: 9999px; margin-right: 0.75rem; }
+        .logo-icon i { color: white; font-size: 1.5rem; }
+        .logo-text { font-size: 1.875rem; font-weight: bold; }
+        .register-container { background: #ffffff; padding: 2rem 2.5rem; border-radius: 10px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); width: 100%; max-width: 420px; color: #1f2937; }
+        .input-group { position: relative; margin-bottom: 1.25rem; }
+        .input-group input { width: 100%; padding: 0.75rem 0.75rem 0.75rem 2.75rem; border: 1px solid #d1d5db; border-radius: 6px; outline: none; background-color: #f9fafb; color: #1f2937; transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
+        .input-group input:focus { border-color: #f59e0b; box-shadow: 0 0 0 1px #f59e0b; background-color: #ffffff; }
+        .input-group i { position: absolute; top: 50%; transform: translateY(-50%); left: 1rem; color: #9ca3af; font-size: 0.875rem; }
+        .btn { background: #f59e0b; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease; width: 100%; font-weight: 600; font-size: 1rem; margin-top: 1rem; }
+        .btn:hover { background: #d97706; }
+        .btn:disabled { background-color: #fbbf24; cursor: not-allowed; }
+        .login-link { text-align: center; margin-top: 1.5rem; color: #4b5563; font-size: 0.875rem; }
+        .login-link a { color: #f59e0b; font-weight: 600; text-decoration: none; }
+        .login-link a:hover { text-decoration: underline; }
+        h2 { color: #111827; font-weight: bold; }
+        p.subtitle { color: #4b5563; font-size: 0.875rem; }
+        .error-message { color: #dc2626; font-size: 0.875rem; text-align: center; margin-top: 1rem; min-height: 1.25rem; }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <div class="logo-container">
+        <div class="logo-icon"> <i class="fas fa-flask"></i> </div>
+        <span class="logo-text">H. Index</span>
+    </div>
+
+    <!-- Register Form -->
+    <div class="register-container">
+        <h2 class="text-center text-2xl mb-2">Create Your Account</h2>
+        <p class="text-center mb-6 subtitle">Sign up as a Client to access our services</p>
+        <form id="registerForm">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="fullName" name="fullName" placeholder="Full Name" required autocomplete="name">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder="Email Address" required autocomplete="email">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="Password" required autocomplete="new-password">
+            </div>
+            <!-- Add Confirm Password if desired
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required autocomplete="new-password">
+            </div>
+             -->
+             <!-- Error Message Area -->
+             <div id="errorMessage" class="error-message"></div>
+            <button type="submit" id="registerButton" class="btn">Register</button>
+        </form>
+        <p class="text-center mt-4 login-link">
+            Already have an account? <a href="login.html">Log in</a>
+        </p>
+    </div>
+
+    <script>
+        const registerForm = document.getElementById("registerForm");
+        const fullNameInput = document.getElementById("fullName");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        // const confirmPasswordInput = document.getElementById("confirmPassword"); // Uncomment if using
+        const registerButton = document.getElementById("registerButton");
+        const errorMessageDiv = document.getElementById("errorMessage");
+
+        registerForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            errorMessageDiv.textContent = ''; // Clear previous errors
+            registerButton.disabled = true;
+            registerButton.textContent = 'Registering...';
+
+            const fullName = fullNameInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            // const confirmPassword = confirmPasswordInput ? confirmPasswordInput.value : null; // Uncomment if using
+
+            // --- Basic Frontend Validation ---
+            if (!fullName || !email || !password ) { // Add confirmPassword if using
+                errorMessageDiv.textContent = "Please fill in all fields.";
+                registerButton.disabled = false;
+                registerButton.textContent = 'Register';
+                return;
+            }
+            // Add more validation (email format, password strength, password match) here if needed
+            // if (password !== confirmPassword) { // Uncomment if using confirmation
+            //     errorMessageDiv.textContent = "Passwords do not match.";
+            //     registerButton.disabled = false;
+            //     registerButton.textContent = 'Register';
+            //     return;
+            // }
+            // --- End Validation ---
+
+            console.log(`Attempting API registration for: ${fullName} (${email})`);
+
+            try {
+                // --- REAL API REGISTRATION ---
+                const response = await fetch('/api/auth/register', { // Relative URL
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    // Explicitly registering as client from this form
+                    body: JSON.stringify({ name: fullName, email, password, role: 'client' })
+                });
+
+                const data = await response.json(); // Always try to parse
+
+                if (!response.ok) {
+                     throw new Error(data.message || `Registration failed (${response.status})`);
+                }
+
+                // --- Registration Successful ---
+                console.log("API Registration successful:", data);
+
+                // Automatically log the user in
+                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('loggedInUser', JSON.stringify(data.user));
+
+                alert(`Registration successful! Welcome, ${data.user.name}. You are now logged in.`);
+
+                // Redirect the newly registered client to their dashboard
+                window.location.href = "client-dashboard.html"; // Relative path
+
+            } catch (error) {
+                console.error('Registration API Error:', error);
+                errorMessageDiv.textContent = error.message; // Show error from backend or fetch failure
+                registerButton.disabled = false;
+                registerButton.textContent = 'Register';
+            }
+        });
+    </script>
+</body>
+</html>

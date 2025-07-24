@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Freelancer Dashboard | H. Index</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+     <style>
+        body { background-color: #f9fafb; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
+        .welcome-message { text-align: center; margin-bottom: 0.5rem; font-size: 1.125rem; color: #4b5563; }
+        .page-title { color: #111827; font-weight: bold; }
+        .status-message-area { transition: opacity 0.5s ease-out; min-height: 2rem; } /* Ensure this class/ID is used by displayStatusMessage */
+        .mobile-menu { display: none; }
+        .mobile-menu.active { display: block; max-height: 500px; overflow: hidden; }
+        .task-item:last-child { margin-bottom: 0; }
+        .accept-button, .decline-button, .chat-button, .complete-button, .remove-button { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+        .accept-button:disabled, .decline-button:disabled, .chat-button:disabled, .complete-button:disabled, .remove-button:disabled { opacity: 0.6; cursor: not-allowed; }
+     </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navbar -->
+     <nav class="bg-white p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+          <div class="flex items-center space-x-2">
+              <div class="bg-yellow-400 p-2 rounded-full"><i class="fas fa-flask text-white text-xl"></i></div>
+              <h1 class="text-2xl font-bold text-gray-800">H. Index</h1>
+          </div>
+          <ul class="hidden md:flex space-x-8 text-gray-700 font-medium items-center">
+              <li><button onclick="logout()" class="hover:text-yellow-500 transition px-3 py-1">Logout</button></li>
+          </ul>
+          <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none"><i class="fas fa-bars text-2xl"></i></button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-white absolute top-full left-0 right-0 shadow-md z-40">
+            <ul class="flex flex-col items-center py-4 space-y-3">
+                <li><button onclick="logout(); closeMobileMenu();" class="block w-full text-center hover:text-yellow-500 transition px-4 py-2">Logout</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 sm:px-6 py-12 md:py-16">
+         <h2 class="text-3xl page-title mb-2 text-center">Freelancer Dashboard</h2>
+        <p id="welcomeMsg" class="welcome-message">Loading...</p>
+
+         <!-- Status Message Area -->
+         <!-- This div needs id="freelancerDashboardStatus" -->
+        <div id="freelancerDashboardStatus" class="max-w-4xl mx-auto mb-6">
+             <!-- Status messages will be injected here by JS using this ID -->
+        </div>
+
+        <!-- Task List Section -->
+        <section class="bg-gray-100 p-4 sm:p-6 rounded-lg shadow-inner">
+            <h3 class="text-xl font-semibold mb-6 text-center text-gray-700">Your Assigned Tasks</h3>
+            <!-- **** Container for task list, id="taskListContainer" **** -->
+            <div id="taskListContainer" class="max-w-4xl mx-auto min-h-[100px]">
+                 <!-- Loading indicator will be inserted here dynamically -->
+                 <!-- Task items will be rendered here by scripts.js -->
+            </div>
+        </section>
+
+    </div> <!-- End main container -->
+
+     <!-- Socket.IO and Scripts -->
+     <script src="/socket.io/socket.io.js"></script>
+     <script src="scripts.js"></script>
+     <script>
+          // Basic Mobile Menu Toggle Logic (same as client)
+         const menuButton = document.getElementById('mobile-menu-button');
+         const mobileMenu = document.getElementById('mobile-menu');
+         const mobileMenuLinks = mobileMenu?.querySelectorAll('a, button');
+
+         function closeMobileMenu() {
+             mobileMenu?.classList.remove('active');
+         }
+
+         if (menuButton && mobileMenu) {
+             menuButton.addEventListener('click', () => {
+                 mobileMenu.classList.toggle('active');
+             });
+             if (mobileMenuLinks) {
+                 mobileMenuLinks.forEach(link => {
+                     link.addEventListener('click', closeMobileMenu);
+                 });
+             }
+             document.addEventListener('click', (event) => {
+                 if (mobileMenu?.classList.contains('active')) {
+                     const isClickInsideNav = menuButton.contains(event.target) || mobileMenu.contains(event.target);
+                     if (!isClickInsideNav) {
+                         closeMobileMenu();
+                     }
+                 }
+             });
+         }
+     </script>
+</body>
+</html>
